@@ -6,7 +6,7 @@ from urllib.request import Request, urlopen
 key = []
 secret = ""
 # obtain appropriate api key from env file but without any dependencies :)
-with open("../.env") as f:
+with open("../../.env") as f:
     key = [line.strip() for line in f]
 for k in key:
     if k.startswith("OPENAI_KEY"):
@@ -37,9 +37,6 @@ class ChatGDB(gdb.Command):
         data = {"model": "gpt-3.5-turbo", "messages":[{"role": "user", "content": promptEngineering + arg}] }
         body, response = make_request(url, headers, data=bytes(json.dumps(data), encoding="utf-8"))
         body = json.loads(body)
-        print(body['choices'][0]['message']['content'])
         gdb.execute(body['choices'][0]['message']['content'])
-
-
 
 ChatGDB()

@@ -1,0 +1,22 @@
+[project]
+name = "ChatGDB"
+version = "0.0.1"
+authors = [
+  { name="Pranay Gosar", email="gosarpranay@gmail.com" },
+]
+description = "Harness the power of ChatGPT directly inside the GDB debugger!"
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: GPLv3 License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/pgosar/chatgdb"
+"Bug Tracker" = "https://github.com/pgosar/chatgdb/issues"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
