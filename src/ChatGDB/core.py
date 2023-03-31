@@ -2,11 +2,12 @@ import gdb
 import json
 from urllib.error import HTTPError, URLError
 from urllib.request import Request, urlopen
-
+from pathlib import Path
 key = []
 secret = ""
+path = Path(__file__).parent / "../../.env"
 # obtain appropriate api key from env file but without any dependencies :)
-with open("../../.env") as f:
+with path.open() as f:
     key = [line.strip() for line in f]
 for k in key:
     if k.startswith("OPENAI_KEY"):

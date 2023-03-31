@@ -6,4 +6,4 @@ For now, the easiest way to install this is to simply clone the repository. You 
 Create a .env file in the root of the project following the example provided with your key.
 
 ### How to use
-While inside gdb, source the core.py file. Then you can use the command chat_gdb appended by your query, for example ```chat_gdb list all breakpoints that I created```
+While inside gdb, source the core.py file with ```source /path/to/core.py```. Then you can use the command chat_gdb appended by your query, for example ```chat_gdb list all breakpoints that I created```
