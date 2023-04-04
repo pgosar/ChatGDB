@@ -6,12 +6,6 @@ from urllib.request import Request, urlopen
 from os.path import abspath, dirname
 from inspect import getfile, currentframe
 
-URL = "https://api.openai.com/v1/chat/completions"
-MODEL = "gpt-3.5-turbo"
-PROMPT = "Give me GDB commands with no explanation. Do NOT write any \
-        English above or below the command. Only give me the command as text. \
-        Here is my question: "
-
 
 def get_key():
     """Gets api key from .env file
@@ -40,7 +34,7 @@ def get_key():
 # make api request
 def make_request(url, headers=None, data=None):
     """Makes API request
-    
+
     Params:
     url (str): url to make request to
     headers (dict, optional): headers to send with request. Defaults to None.
@@ -52,16 +46,37 @@ def make_request(url, headers=None, data=None):
             return response.read(), response
     except HTTPError as error:
         print(error.status, error.reason)
+        quit("Exiting...")
     except URLError as error:
         print(error.reason)
+        quit("Exiting...")
     except TimeoutError:
         print("Request timed out")
+        quit("Exiting...")
 
 
-class ChatGDB(gdb.Command):
+prev_command = ""
+HEADERS = {
+    "Authorization": "Bearer " + get_key(),
+    "Content-Type": "application/json"
+}
+URL = "https://api.openai.com/v1/chat/completions"
+MODEL = "gpt-3.5-turbo"
+COMMAND_PROMPT = "Give me GDB commands with no explanation. Do NOT write any \
+        English above or below the command. Only give me the command as text. \
+        Here is my question: "
+EXPLANATION_PROMPT = "Give me an explanation for this GDB command: "
+
+
+class GDBCommand(gdb.Command):
+    """Custom GDB command - ?
+
+    This class creates a custom command denoted by ? that is used
+    to generate GDB commands based on plain English input.
+    """
     def __init__(self):
         """Initializes custom GDB command"""
-        super(ChatGDB, self).__init__("chat_gdb", gdb.COMMAND_DATA)
+        super(GDBCommand, self).__init__("chat", gdb.COMMAND_DATA)
 
     # creates api request on command invocation
     def invoke(self, arg, from_tty):
@@ -71,19 +86,52 @@ class ChatGDB(gdb.Command):
         arg (str): argument passed to command
         from_tty (bool): whether command was invoked from TTY
         """
-        headers = {
-            "Authorization": "Bearer " + get_key(),
-            "Content-Type": "application/json"}
+        global prev_command
         data = {"model": MODEL,
                 "messages": [{"role": "user",
-                              "content": PROMPT + arg}]}
+                              "content": COMMAND_PROMPT + arg}]}
 
         body, response = make_request(
-            URL, headers, data=bytes(
+            URL, HEADERS, data=bytes(
                 json.dumps(data), encoding="utf-8"))
         body = json.loads(body)
+        command = body['choices'][0]['message']['content']
+        prev_command = command
+        print(command)
+        gdb.execute(command)
+
+
+class ExplainCommand(gdb.Command):
+    """Custom GDB command - explain
+
+    This class creates a custom command denoted by explain that is used
+    to generate explanations for either the previous command or a user query
+    """
+
+    def __init__(self):
+        """Initializes custom GDB command"""
+        super(ExplainCommand, self).__init__("explain", gdb.COMMAND_DATA)
+
+    # creates api request on command invocation
+    def invoke(self, arg, from_tty):
+        """Invokes custom GDB command and sends API request
+
+        Params:
+            arg (str): argument passed to commands
+            from_tty (bool): whether command was invoked from from_tty
+        """
+        content = arg
+        if arg == "":
+            content = EXPLANATION_PROMPT + prev_command
+
+        data = {"model": MODEL,
+                "messages": [{"role": "user",
+                              "content": content}]}
+        body, response = make_request(
+            URL, HEADERS, data=bytes(json.dumps(data), encoding="utf-8"))
+        body = json.loads(body)
         print(body['choices'][0]['message']['content'])
-        gdb.execute(body['choices'][0]['message']['content'])
 
 
-ChatGDB()
+GDBCommand()
+ExplainCommand()

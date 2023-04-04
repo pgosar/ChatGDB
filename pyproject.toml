@@ -1,15 +1,15 @@
 [project]
 name = "ChatGDB"
-version = "0.0.1"
+version = "0.1.0"
 authors = [
   { name="Pranay Gosar", email="gosarpranay@gmail.com" },
 ]
 description = "Harness the power of ChatGPT directly inside the GDB debugger!"
 readme = "README.md"
-requires-python = ">=3.7"
+requires-python = ">=3.3"
 classifiers = [
     "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
 
