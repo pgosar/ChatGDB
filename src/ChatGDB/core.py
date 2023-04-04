@@ -62,9 +62,9 @@ HEADERS = {
 }
 URL = "https://api.openai.com/v1/chat/completions"
 MODEL = "gpt-3.5-turbo"
-COMMAND_PROMPT = "Give me GDB commands with no explanation. Do NOT write any \
-        English above or below the command. Only give me the command as text. \
-        Here is my question: "
+COMMAND_PROMPT = "Give me a SINGLE GDB command with no explanation. Do NOT \
+write any English above or below the command. Only give me the command as \
+text. Here is my question: "
 EXPLANATION_PROMPT = "Give me an explanation for this GDB command: "
 
 

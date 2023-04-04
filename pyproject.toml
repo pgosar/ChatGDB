@@ -1,6 +1,6 @@
 [project]
 name = "ChatGDB"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Pranay Gosar", email="gosarpranay@gmail.com" },
 ]
