@@ -31,7 +31,6 @@ def get_key():
     return secret[0]
 
 
-# make api request
 def make_request(url, headers=None, data=None):
     """Makes API request
 
@@ -55,6 +54,20 @@ def make_request(url, headers=None, data=None):
         quit("Exiting...")
 
 
+def chat_help():
+    """Prints help message for all available commands"""
+    print("ChatGDB is a python script that defines some extra helpful GDB "
+          "commands. The commands are as follows:\n\n"
+          "chat: This command is used to generate GDB commands based on plain "
+          "English input. For example, 'chat stop my code at line 7' will "
+          "generate the GDB command 'break 7'.\n\n"
+          "explain: This command is used to generate explanations for either "
+          "the previous command or a user query. 'explain' with "
+          "no arguments will generate an explanation for the previous command "
+          "but typing a query after will generate an answer for it.\n\n"
+          )
+
+
 prev_command = ""
 HEADERS = {
     "Authorization": "Bearer " + get_key(),
@@ -69,11 +82,12 @@ EXPLANATION_PROMPT = "Give me an explanation for this GDB command: "
 
 
 class GDBCommand(gdb.Command):
-    """Custom GDB command - ?
+    """Custom GDB command - chat
 
-    This class creates a custom command denoted by ? that is used
-    to generate GDB commands based on plain English input.
+    The chat command is used to generate GDB commands based on plain English
+    input.
     """
+
     def __init__(self):
         """Initializes custom GDB command"""
         super(GDBCommand, self).__init__("chat", gdb.COMMAND_DATA)
@@ -90,6 +104,10 @@ class GDBCommand(gdb.Command):
         data = {"model": MODEL,
                 "messages": [{"role": "user",
                               "content": COMMAND_PROMPT + arg}]}
+        # handling if user is asking for help on how to use the commands
+        if arg == "help":
+            chat_help()
+            return
 
         body, response = make_request(
             URL, HEADERS, data=bytes(
@@ -104,8 +122,8 @@ class GDBCommand(gdb.Command):
 class ExplainCommand(gdb.Command):
     """Custom GDB command - explain
 
-    This class creates a custom command denoted by explain that is used
-    to generate explanations for either the previous command or a user query
+    The explain command is used to generate explanations for either the
+    previous command or a user query
     """
 
     def __init__(self):
@@ -135,3 +153,12 @@ class ExplainCommand(gdb.Command):
 
 GDBCommand()
 ExplainCommand()
+
+
+def main():
+    print("ChatGDB loaded successfully. Type 'chat help' for information "
+          "on how to run the commands.")
+
+
+if __name__ == "__main__":
+    main()
