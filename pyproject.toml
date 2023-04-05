@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ChatGDB"
-version = "0.3.0"
+version = "0.3.1"
 authors = ["Pranay Gosar <gosarpranay@gmail.com>"]
 description = "Harness the power of ChatGPT directly inside the GDB debugger!"
 readme = "README.md"
@@ -18,5 +18,5 @@ python = "^3.3"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-# [tool.poetry.scripts]
-# chatgdb = "ChatGDB.chatgdb:main"
+[tool.poetry.scripts]
+chatgdb = "chatgdb.cli:main"

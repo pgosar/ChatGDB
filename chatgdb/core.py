@@ -57,7 +57,7 @@ def make_request(url, headers=None, data=None):
 def chat_help():
     """Prints help message for all available commands"""
     print("ChatGDB is a python script that defines some extra helpful GDB "
-          "commands. Before use, be sure to set up your api key using the " 
+          "commands. Before use, be sure to set up your api key using the "
           "CLI tool. The commands are as follows:\n\n"
           "chat: This command is used to generate GDB commands based on plain "
           "English input. For example, 'chat stop my code at line 7' will "
