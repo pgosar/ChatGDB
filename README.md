@@ -1,6 +1,7 @@
 # ChatGDB
 Harness the power of ChatGPT inside the GDB debugger!
-![Image](./img/workingExample.png)
+![image](https://user-images.githubusercontent.com/55164602/229982475-9a9724fe-91d0-48a4-aa3b-85bfc38edafa.png)
+
 
 ### Installation instructions
 To install, run the command ```pip3 install chatgdb```. It will create an executable called
