@@ -14,7 +14,7 @@ folder
 
 
 ### How to use
-While inside gdb, source the core.py file with ```source /path/to/core.py```. By default, this is pythonXXX/site-packages/chatgdb/core.py.  Then you can use the command chat_gdb appended by your query, for example ```chat list all breakpoints that I created```. There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, and optionally, with a query to just ask GPT a question.
+While inside gdb, source the core.py file with ```source /path/to/core.py```. By default, this is pythonXXX/site-packages/chatgdb/core.py.  Then you can use the command chat appended by your query, for example ```chat list all breakpoints that I created```. There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, and optionally, with a query to just ask GPT a question. Run chat help to print out a short tutorial on how to use the tool.
 
 You can also edit your ```$HOME/.gdbinit``` and source the file automatically on startup with
 ```source /path/to/core.py```.
