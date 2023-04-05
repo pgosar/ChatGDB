@@ -1,22 +1,22 @@
-[project]
+[tool.poetry]
 name = "ChatGDB"
-version = "0.2.0"
-authors = [
-  { name="Pranay Gosar", email="gosarpranay@gmail.com" },
-]
+version = "0.3.0"
+authors = ["Pranay Gosar <gosarpranay@gmail.com>"]
 description = "Harness the power of ChatGPT directly inside the GDB debugger!"
 readme = "README.md"
-requires-python = ">=3.3"
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
+license = "MIT"
+repository = "https://github.com/pgosar/chatgdb"
+keywords = ["gdb", "debugger", "chatgpt"]
 
-[project.urls]
-"Homepage" = "https://github.com/pgosar/chatgdb"
+[tool.poetry.urls]
 "Bug Tracker" = "https://github.com/pgosar/chatgdb/issues"
 
+[tool.poetry.dependencies]
+python = "^3.3"
+
 [build-system]
-requires = ["hatchling"]
-build-backend = "hatchling.build"
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+# [tool.poetry.scripts]
+# chatgdb = "ChatGDB.chatgdb:main"

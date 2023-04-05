@@ -15,7 +15,7 @@ def get_key():
     key = []
     secret = ""
     # gets path of this script - OS independent
-    path = dirname(abspath(getfile(currentframe()))) + "/../../.env"
+    path = dirname(abspath(getfile(currentframe()))) + "/.secret.txt"
     try:
         # get appropriate api key
         with open(path) as f:
@@ -24,8 +24,8 @@ def get_key():
             if k.startswith("OPENAI_KEY"):
                 secret = k.split('"')[1::2]
     except FileNotFoundError:
-        print("Could not find .env file. Please make sure you have a .env file "
-              "containing your api key in the root directory of this project.")
+        print("Could not find api key. Please make sure you've run the CLI "
+              "tool and set up your api key")
         quit("Exiting...")
 
     return secret[0]
@@ -57,7 +57,8 @@ def make_request(url, headers=None, data=None):
 def chat_help():
     """Prints help message for all available commands"""
     print("ChatGDB is a python script that defines some extra helpful GDB "
-          "commands. The commands are as follows:\n\n"
+          "commands. Before use, be sure to set up your api key using the " 
+          "CLI tool. The commands are as follows:\n\n"
           "chat: This command is used to generate GDB commands based on plain "
           "English input. For example, 'chat stop my code at line 7' will "
           "generate the GDB command 'break 7'.\n\n"
