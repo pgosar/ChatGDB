@@ -13,6 +13,11 @@ Without the API key, you won't be able to make requests to OpenAI. The API key i
 text in the same directory as the installed script, which is currently in your python site packages
 folder
 
+Optionally, you can also download the compressed files in the releases page to get the scripts directly.
+If you do this, you will need to instead invoke the cli tool with 
+
+```python path/to/cli.py -k <API KEY>```.
+
 
 ### How to use
 While inside gdb, source the core.py file with ```source /path/to/core.py```. By default, this is pythonXXX/site-packages/chatgdb/core.py.  Then you can use the command chat appended by your query, for example ```chat list all breakpoints that I created```. There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, and optionally, with a query to just ask GPT a question. Run chat help to print out a short tutorial on how to use the tool.
