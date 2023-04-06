@@ -1,9 +1,10 @@
 # ChatGDB
 Harness the power of ChatGPT inside the GDB debugger!
-![image](https://user-images.githubusercontent.com/55164602/229982475-9a9724fe-91d0-48a4-aa3b-85bfc38edafa.png)
-
+![Image](https://lh5.googleusercontent.com/xZMLwWWxavqYjC3fyCIZJ0m-s-f-XEoiOeWGbxRrw3dWoukUoWzJJ4iiBkVO2Vtiyr4K6o0WkTs7B40TapeBPIYwgVRVhDXGVjB4tFYoKH3_nK847nYXl3pISB6dEP6Wp_o0uPlfJOjCrLspm0_VNw)
 
 ### Installation instructions
+First, make sure you install [pip](https://pip.pypa.io/en/stable/installation/)
+
 To install, run the command ```pip3 install chatgdb```. It will create an executable called
 ```chatgdb``` that you will have to use to set your api key. To do that, run the command
 
@@ -11,7 +12,9 @@ To install, run the command ```pip3 install chatgdb```. It will create an execut
 
 Without the API key, you won't be able to make requests to OpenAI. The API key is stored in
 text in the same directory as the installed script, which is currently in your python site packages
-folder
+folder along with the main script. You can easily find this location by running the following in your terminal:
+
+``` python -m site --user-site```
 
 Optionally, you can also download the compressed files in the releases page to get the scripts directly.
 If you do this, you will need to instead invoke the cli tool with 
@@ -20,7 +23,11 @@ If you do this, you will need to instead invoke the cli tool with
 
 
 ### How to use
-While inside gdb, source the core.py file with ```source /path/to/core.py```. By default, this is pythonXXX/site-packages/chatgdb/core.py.  Then you can use the command chat appended by your query, for example ```chat list all breakpoints that I created```. There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, and optionally, with a query to just ask GPT a question. Run chat help to print out a short tutorial on how to use the tool.
+I first recommend editing your ```$HOME/.gdbinit``` to source the main script automatically on startup. Run the following command:
 
-You can also edit your ```$HOME/.gdbinit``` and source the file automatically on startup with
-```source /path/to/core.py```.
+```echo "source $(python -m site --user-site)/chatgdb/core.py" > $HOME/.gdbinit```
+
+While inside GDB the command chat appended by your query, for example ```chat list all breakpoints that I created```. There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, and optionally, with a query to just ask GPT a question. For example, running ```explain``` directly after running ```break 7``` would prompt the tool to explain how breakpoints work. Running ```explain how input formatting works in gdb``` would prompt it to explain input formatting (see the image at the top).
+
+Run chat help to print out a short tutorial on how to use the tool.
+
