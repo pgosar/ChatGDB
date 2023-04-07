@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "ChatGDB"
-version = "1.0.2"
+version = "1.0.3"
 authors = ["Pranay Gosar <gosarpranay@gmail.com>"]
 description = "Harness the power of ChatGPT directly inside the GDB debugger!"
 readme = "README.md"

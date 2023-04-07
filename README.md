@@ -1,9 +1,16 @@
 # ChatGDB
 Harness the power of ChatGPT inside the GDB debugger!
+
+
+ChatGDB is a tool designed to superpower your debugging experience with GDB, a debugger for compiled languages. Use it to accelerate your debugging workflow by leveraging the power of ChatGPT to assist you while using GDB! 
+
+It allows you to explain in natural language what you want to do, and then automatically execute the relevant command. Optionally, you can ask ChatGPT to explain the command it just ran or even pass in any question for it to answer. Focus on what's important - figuring out that nasty bug instead of chasing down GDB commands at the tip of your tongue.
+
 ![Image](https://lh5.googleusercontent.com/xZMLwWWxavqYjC3fyCIZJ0m-s-f-XEoiOeWGbxRrw3dWoukUoWzJJ4iiBkVO2Vtiyr4K6o0WkTs7B40TapeBPIYwgVRVhDXGVjB4tFYoKH3_nK847nYXl3pISB6dEP6Wp_o0uPlfJOjCrLspm0_VNw)
 
 ### Installation instructions
-First, make sure you install [pip](https://pip.pypa.io/en/stable/installation/)
+First, make sure you install [pip](https://pip.pypa.io/en/stable/installation/). ChatGDB also
+requires a python version of 3.3 or above.
 
 To install, run the command ```pip3 install chatgdb```. It will create an executable called
 ```chatgdb``` that you will have to use to set your api key. To do that, run the command
@@ -17,9 +24,9 @@ folder along with the main script. You can easily find this location by running 
 ``` python -m site --user-site```
 
 Optionally, you can also download the compressed files in the releases page to get the scripts directly.
-If you do this, you will need to instead invoke the cli tool with 
+If you do this, navigate to the ```chatgdb``` folder, and you can install with
 
-```python path/to/cli.py -k <API KEY>```.
+```pip3 install .```.
 
 
 ### How to use
