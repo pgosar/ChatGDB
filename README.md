@@ -8,12 +8,24 @@ It allows you to explain in natural language what you want to do, and then autom
 
 ![Image](https://lh5.googleusercontent.com/xZMLwWWxavqYjC3fyCIZJ0m-s-f-XEoiOeWGbxRrw3dWoukUoWzJJ4iiBkVO2Vtiyr4K6o0WkTs7B40TapeBPIYwgVRVhDXGVjB4tFYoKH3_nK847nYXl3pISB6dEP6Wp_o0uPlfJOjCrLspm0_VNw)
 
+## Contents
+
+1. [Installation](#installation-intructions)
+2. [Updating](#updating)
+3. [Usage](#usage)
+4. [Contributing](#contributing)
+5. [Getting Updates](#getting-updates)
+
 ### Installation instructions
 First, make sure you install [pip](https://pip.pypa.io/en/stable/installation/). ChatGDB also
 requires a python version of 3.3 or above.
 
-To install, run the command ```pip3 install chatgdb```. It will create an executable called
-```chatgdb``` that you will have to use to set your api key. To do that, run the command
+To install, run the command 
+
+```pip3 install chatgdb```. 
+
+It will create an executable called ```chatgdb``` that you will have to use to set your api key. 
+To do that, run the command
 
 ```chatgdb -k <API KEY> ```
 
@@ -28,13 +40,32 @@ If you do this, navigate to the ```chatgdb``` folder, and you can install with
 
 ```pip3 install .```.
 
+### Updating
 
-### How to use
+To update ChatGDB, run the following
+
+```pip3 install chatgdb --upgrade```
+
+
+### Usage
 I first recommend editing your ```$HOME/.gdbinit``` to source the main script automatically on startup. Run the following command:
 
 ```echo "source $(python -m site --user-site)/chatgdb/core.py" > $HOME/.gdbinit```
 
-While inside GDB the command chat appended by your query, for example ```chat list all breakpoints that I created```. There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, and optionally, with a query to just ask GPT a question. For example, running ```explain``` directly after running ```break 7``` would prompt the tool to explain how breakpoints work. Running ```explain how input formatting works in gdb``` would prompt it to explain input formatting (see the image at the top).
+While inside GDB the command chat appended by your query, for example ```chat list all breakpoints that I created```. 
+There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, 
+and optionally, with a query to just ask GPT a question. For example, running ```explain``` directly after running 
+```break 7``` would prompt the tool to explain how breakpoints work. Running ```explain how input formatting works in gdb``` 
+would prompt it to explain input formatting (see the image at the top).
 
 Run chat help to print out a short tutorial on how to use the tool.
 
+### Contributing
+Thanks for your interest in contributing to ChatGDB! See [CONTRIBUTING.md](CONTRIBUTING.md) on ways to
+help the development effort. 
+
+### Staying Updated
+
+If you'd like to stay up-to-date on new features/fixes, follow my [twitter](https://twitter.com/pranay__gosar). There's plenty
+of exciting features on the horizon such as complete context-awareness that will make it possible
+for ChatGDB to not only help you use GDB, but to help you fix the code itself.
