@@ -1,10 +1,10 @@
 # ChatGDB
-Harness the power of ChatGPT inside the GDB debugger!
+Harness the power of ChatGPT inside the GDB/LLDB debugger!
 
 
-ChatGDB is a tool designed to superpower your debugging experience with GDB, a debugger for compiled languages. Use it to accelerate your debugging workflow by leveraging the power of ChatGPT to assist you while using GDB! 
+ChatGDB is a tool designed to superpower your debugging experience with GDB or LLDB, debuggers for compiled languages. Use it to accelerate your debugging workflow by leveraging the power of ChatGPT to assist you while using GDB/LLDB! 
 
-It allows you to explain in natural language what you want to do, and then automatically execute the relevant command. Optionally, you can ask ChatGPT to explain the command it just ran or even pass in any question for it to answer. Focus on what's important - figuring out that nasty bug instead of chasing down GDB commands at the tip of your tongue.
+It allows you to explain in natural language what you want to do, and then automatically execute the relevant command. Optionally, you can ask ChatGPT to explain the command it just ran or even pass in any question for it to answer. Focus on what's important - figuring out that nasty bug instead of chasing down GDB/LLDB commands at the tip of your tongue.
 
 ![Image](https://lh5.googleusercontent.com/xZMLwWWxavqYjC3fyCIZJ0m-s-f-XEoiOeWGbxRrw3dWoukUoWzJJ4iiBkVO2Vtiyr4K6o0WkTs7B40TapeBPIYwgVRVhDXGVjB4tFYoKH3_nK847nYXl3pISB6dEP6Wp_o0uPlfJOjCrLspm0_VNw)
 
@@ -48,11 +48,15 @@ To update ChatGDB, run the following
 
 
 ### Usage
-I first recommend editing your ```$HOME/.gdbinit``` to source the main script automatically on startup. Run the following command:
+For GDB usage, I first recommend editing your ```$HOME/.gdbinit``` to source the main script automatically on startup. Run the following command:
 
-```echo "source $(python -m site --user-site)/chatgdb/core.py" > $HOME/.gdbinit```
+```echo "source $(python -m site --user-site)/chatgdb/gdb.py" > $HOME/.gdbinit```
 
-While inside GDB the command chat appended by your query, for example ```chat list all breakpoints that I created```. 
+The same applies for LLDB. Edit your ```$HOME/.lldbinit``` and run the following command:
+
+```echo "command script import $(python -m site --user-site)/chatgdb/lldb.py" > $HOME/.lldbinit```
+
+While inside your debugger, you can run the command chat appended by your query, for example ```chat list all breakpoints that I created```. 
 There is also a command called ```explain``` that you can use with no arguments to explain the previously run command, 
 and optionally, with a query to just ask GPT a question. For example, running ```explain``` directly after running 
 ```break 7``` would prompt the tool to explain how breakpoints work. Running ```explain how input formatting works in gdb``` 
