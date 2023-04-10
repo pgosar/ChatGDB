@@ -29,8 +29,11 @@ To do that, run the command
 
 ```chatgdb -k <API KEY> ```
 
-Without the API key, you won't be able to make requests to OpenAI. The API key is stored in
-text in the same directory as the installed script, which is currently in your python site packages
+You also need to set the model to use. There are two possible options, ```gpt-3.5-turbo``` and ```gpt-4```:
+
+```chatgdb -m <MODEL>```
+
+This information is stored in text in the same directory as the installed script, which is currently in your python site packages
 folder along with the main script. You can easily find this location by running the following in your terminal:
 
 ``` python -m site --user-site```

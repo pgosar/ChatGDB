@@ -7,7 +7,7 @@ from inspect import getfile, currentframe
 
 
 def get_key():
-    """Gets api key from .env file
+    """Gets api key from secret file
 
     Returns: (str) api key
     """
@@ -24,10 +24,34 @@ def get_key():
                 secret = k.split('"')[1::2]
     except FileNotFoundError:
         print("Could not find api key. Please make sure you've run the CLI "
-              "tool and set up your api key")
+              "tool and set up your model")
         quit("Exiting...")
 
     return secret[0]
+
+
+def get_model():
+    """Gets model from model file
+
+    Returns: (str) model
+    """
+    model = []
+    model_name = ""
+    # gets path of this script - OS independent
+    path = dirname(abspath(getfile(currentframe()))) + "/.model.txt"
+    try:
+        # get appropriate api key
+        with open(path) as f:
+            model = [line.strip() for line in f]
+        for m in model:
+            if m.startswith("MODEL"):
+                model_name = m.split('"')[1::2]
+    except FileNotFoundError:
+        print("Could not find model. Please make sure you've run the CLI "
+              "tool and set up your model")
+        quit("Exiting...")
+
+    return model_name[0]
 
 
 def make_request(url, headers=None, data=None):
@@ -74,7 +98,6 @@ HEADERS = {
     "Content-Type": "application/json"
 }
 URL = "https://api.openai.com/v1/chat/completions"
-MODEL = "gpt-3.5-turbo"
 
 
 def explain_helper(prev_command, command, prompt):
@@ -86,7 +109,7 @@ def explain_helper(prev_command, command, prompt):
     prompt (str): prompt to use for explanation
     """
     question = prompt + prev_command if command == "" else command
-    data = {"model": MODEL,
+    data = {"model": get_model(),
             "messages": [{"role": "user",
                           "content": question}]}
     body, response = make_request(URL, HEADERS, data=bytes(json.dumps(data),
@@ -98,12 +121,12 @@ def explain_helper(prev_command, command, prompt):
 
 def chat_helper(command, prompt):
     """Generates GDB/LLDB command based on user input
-    
+
     Params:
     command (str): user input
     prompt (str): prompt to use for command generation
     """
-    data = {"model": MODEL,
+    data = {"model": get_model(),
             "messages": [{"role": "user",
                           "content": prompt + command}]}
 

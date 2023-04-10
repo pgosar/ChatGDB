@@ -4,12 +4,19 @@ from inspect import getfile, currentframe
 from urllib.request import Request, urlopen
 import json
 
+PATH = dirname(abspath(getfile(currentframe())))
+
 
 def set_key(key):
     """Set the api key for ChatGDB"""
-    path = dirname(abspath(getfile(currentframe()))) + "/.secret.txt"
-    with open(path, "w") as f:
+    with open(PATH + "/.secret.txt", "w") as f:
         f.write("OPENAI_KEY=\"" + key + "\"")
+
+
+def set_model(model):
+    """Set the model for ChatGDB"""
+    with open(PATH + "/.model.txt", "w") as f:
+        f.write("MODEL=\"" + model + "\"")
 
 
 def version():
@@ -28,6 +35,12 @@ def main():
         type=str,
         help="Provide an api key for ChatGDB")
     parser.add_argument(
+        '-m',
+        "--model",
+        type=str,
+        choices=["gpt-3.5-turbo", "gpt-4"],
+        help="Provide a model for ChatGDB (gpt-3.5-turbo or gpt-4)")
+    parser.add_argument(
         '-v',
         "--version",
         action="version",
@@ -37,6 +50,8 @@ def main():
     args = parser.parse_args()
     if args.key:
         set_key(args.key)
+    elif args.model:
+        set_model(args.model)
     else:
         parser.print_help()
 
