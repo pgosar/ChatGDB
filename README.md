@@ -29,9 +29,13 @@ To do that, run the command
 
 ```chatgdb -k <API KEY> ```
 
-You also need to set the model to use. There are two possible options, ```gpt-3.5-turbo``` and ```gpt-4```:
+You can set the model to use. There are two possible options, ```gpt-3.5-turbo``` and ```gpt-4```(defaulting to the former):
 
 ```chatgdb -m <MODEL>```
+
+If you are using a non-official api provider, you can also set the api url:
+
+```chatgdb -u <api-url>```
 
 This information is stored in text in the same directory as the installed script, which is currently in your python site packages
 folder along with the main script. You can easily find this location by running the following in your terminal:

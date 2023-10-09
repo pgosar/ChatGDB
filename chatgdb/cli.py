@@ -18,6 +18,10 @@ def set_model(model):
     with open(PATH + "/.model.txt", "w") as f:
         f.write("MODEL=\"" + model + "\"")
 
+def set_url(url):
+    """Set the url for ChatGDB"""
+    with open(PATH + "/.url.txt", "w") as f:
+        f.write("URL=\"" + url + "\"")
 
 def version():
     """Return version information"""
@@ -39,7 +43,16 @@ def main():
         "--model",
         type=str,
         choices=["gpt-3.5-turbo", "gpt-4"],
-        help="Provide a model for ChatGDB (gpt-3.5-turbo or gpt-4)")
+        help="Provide a model for ChatGDB (gpt-3.5-turbo or gpt-4)",
+        default="gpt-3.5-turbo"
+    )
+    parser.add_argument(
+        '-u',
+        "--url",
+        type=str,
+        help="Provide a API url for ChatGDB",
+        default="https://api.openai.com/v1/chat/completions"
+    )
     parser.add_argument(
         '-v',
         "--version",
@@ -50,9 +63,11 @@ def main():
     args = parser.parse_args()
     if args.key:
         set_key(args.key)
-    elif args.model:
+    if args.model:
         set_model(args.model)
-    else:
+    if args.url:
+        set_url(args.url)
+    if not any([args.key, args.model, args.url]):
         parser.print_help()
 
 

@@ -53,6 +53,29 @@ def get_model():
 
     return model_name[0]
 
+def get_url():
+    """Gets api url from url file
+
+    Returns: (str) url
+    """
+    url = []
+    url_name = ""
+    # gets path of this script - OS independent
+    path = dirname(abspath(getfile(currentframe()))) + "/.url.txt"
+    try:
+        # get appropriate api url
+        with open(path) as f:
+            url = [line.strip() for line in f]
+        for u in url:
+            if u.startswith("URL"):
+                url_name = u.split('"')[1::2]
+    except FileNotFoundError:
+        print("Could not find url. Please make sure you've run the CLI "
+              "tool and set up your url")
+        quit("Exiting...")
+    return url_name[0]
+
+
 
 def make_request(url, headers=None, data=None):
     """Makes API request
@@ -97,8 +120,7 @@ HEADERS = {
     "Authorization": "Bearer " + get_key(),
     "Content-Type": "application/json"
 }
-URL = "https://api.openai.com/v1/chat/completions"
-
+URL = get_url()
 
 def explain_helper(prev_command, command, prompt):
     """Generates explanation for either the previous command or a user query
