@@ -42,8 +42,8 @@ def main():
         '-m',
         "--model",
         type=str,
-        choices=["gpt-3.5-turbo", "gpt-4"],
-        help="Provide a model for ChatGDB (gpt-3.5-turbo or gpt-4)",
+        choices=["gpt-3.5-turbo", "gpt-4", "gpt-4o", "gpt-4o-mini", "o1-preview", "o1-mini"],
+        help="Provide a model for ChatGDB (gpt-3.5-turbo, gpt-4, gpt-4o, gpt-4o-mini, o1-preview, o1-mini)",
         default="gpt-3.5-turbo"
     )
     parser.add_argument(
